@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    p Notes:
+    table
+        tr 
+            th View
+            th Title 
+            th Date
+        each note in notes
+            tr
+                td
+                    a(href=`/note/${note._id}/view`) view
+                td=note.title
+                td=note.date

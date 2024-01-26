@@ -1,33 +1,41 @@
 body {
-  padding: 20px;
+  width: 100;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+   /* Include padding and borders in the element's total width and height */
 }
 
 a {
   color: #00B7FF;
 }
 
-.round-box {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 15px;
-  background-color: antiquewhite;
-  color: darkblue;
-  width: 10vw;
-
-}
-
+.round-box,
 .create-main-box {
   margin: 20px;
   padding: 20px;
   border: 1px solid black;
   border-radius: 15px;
   background-color: antiquewhite;
-  color: darkblue;
+  box-sizing: border-box; /* Include padding and borders in the element's total width and height */
+}
+
+.create-main-box {
   width: 30vw;
 }
 
 td {
   padding: 10px;
+}
+
+.login-input {
+	padding:7px;
+	border-radius:7px;
+	border: 1px solid black;
+  width:27vw;
+}	
+.login-input:focus {
+  box-shadow: rgba(9, 34, 59, 0.5);
 }
