@@ -1,9 +1,15 @@
-    body 
-        form(action='/bank/login',method='post')
-            div(class='create-main-box')
-                p username
-                div(class='login-input')
-                    input(type='text' name='username')
-                p password
-                div(class='login-input')
-                    input(type='text' name='password')
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", type="text/css", href="style.css")
+  body
+    form(action="/bank/login", method="post")
+      .create-main-box
+        p username
+        div
+          input.login-input(type="text", name="username", style="width:27vw")
+        p password
+        div
+          input.login-input(type="text", name="password", style="width:27vw")

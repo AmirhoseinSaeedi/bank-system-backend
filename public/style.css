@@ -5,11 +5,11 @@ body {
   justify-content: center;
   align-items: center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-   /* Include padding and borders in the element's total width and height */
+  /* Include padding and borders in the element's total width and height */
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
 
 .round-box,
@@ -31,11 +31,11 @@ td {
 }
 
 .login-input {
-	padding:7px;
-	border-radius:7px;
-	border: 1px solid black;
-  width:27vw;
-}	
+  padding: 7px;
+  border-radius: 7px;
+  border: 1px solid black;
+  width: 27vw;
+}
 .login-input:focus {
   box-shadow: rgba(9, 34, 59, 0.5);
 }
