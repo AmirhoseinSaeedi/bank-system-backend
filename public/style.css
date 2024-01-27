@@ -35,6 +35,7 @@ td {
   border-radius: 7px;
   border: 1px solid black;
   width: 27vw;
+  margin-bottom: 4px;
 }
 .login-input:focus {
   box-shadow: rgba(9, 34, 59, 0.5);
