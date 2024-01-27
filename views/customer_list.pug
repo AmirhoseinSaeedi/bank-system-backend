@@ -1,15 +1,22 @@
 extends layout
 
 block content
-    p Notes:
-    table
-        tr 
-            th View
-            th Title 
-            th Date
-        each note in notes
-            tr
-                td
-                    a(href=`/note/${note._id}/view`) view
-                td=note.title
-                td=note.date
+    //- p customers:    
+    div.container-fluid.w-75()
+        table.table()
+            tr 
+                th Id
+                th Name 
+                th Last Name
+                th 
+            each customer in results
+                tr
+                    tdcustomer.iduser
+                        //- a(href=`/user/${note.iduser}`) view
+                    td=customer.firstname
+                    td=customer.lastname
+                    td
+                    td
+                    td 
+                        button(type='button' class='btn btn-primary mx-3' onclick=`location.href='/user/${customer.id}'`) details  
+                        button.btn.btn-outline-danger delete
