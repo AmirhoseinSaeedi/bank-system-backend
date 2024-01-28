@@ -1,12 +1,57 @@
 extends layout
 
 block content
-    body
-        div(style='background-color:red')
-            h3 Name
-            div(class='') 
-                p=results.firstname
-            h3 Last Name
-            div(class='')
-                p=results.lastname
-
+    div(class='container-fluid w-75')
+        div(class='mb-10' style='background-color:#7D7C7C')
+            if results 
+                each customer in results
+                    h3 Name
+                    div(class='w-75')
+                        input(id='name-input' class='form-control mx-4' disabled value=customer.firstname)
+                    h3 Last Name
+                    div(class='w-75')
+                        input(id='last-name-input' class='form-control mx-4' disabled value=customer.lastname)
+                    h3 accont number
+                    div(class='w-75')
+                        input(id='account-number-input' class='form-control my-2 mx-4' disabled value=432423)
+                    button(id='edit-customer-btn' class='btn btn-dark mx-4' onclick='toggleEdit(' + customer.id + ')') Edit
+                        
+                            
+        div(class='my-4 col')
+            h3(style='background-color:gray') Transactions
+            table(class='table')
+                tr 
+                    th test
+                    th test2 
+                    th test3
+                    th
+                    th
+                    th
+                tr
+                    td hkh 
+                    td kjk
+                    td jfkldj
+                    td 
+                    td 
+                    td 
+                        button(class='btn btn-outline-primary mx-2') details 
+                        button(class='btn btn-outline-secondary') delete
+                tr    
+                    td hkh 
+                    td kjk
+                    td jfkldj
+                    td 
+                    td 
+                    td 
+                        button(class='btn btn-outline-primary mx-2') details 
+                        button(class='btn btn-outline-secondary') delete
+                tr    
+                    td hkh 
+                    td kjk
+                    td jfkldj
+                    td 
+                    td 
+                    td 
+                        button(class='btn btn-outline-primary mx-2') details 
+                        button(class='btn btn-outline-secondary') delete
+            
