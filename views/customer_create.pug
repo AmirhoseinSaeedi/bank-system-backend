@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+    //- to do change the action
+
+    form(action='/note/create',method='post')
+        div(class='create-main-box')
+            p Name
+            div(class='')
+                input(class="form-control" type='text' name='title' style='width:27vw')
+            p Last Name
+            div(class='')
+                input(class='form-control' type="text")(name="text", cols="30", rows="10" style='width:27vw') 
+            div(class='')
+                input(class='btn btn-outline-dark' type='submit' value='Create Note' style='margin-top:20px') 
+
