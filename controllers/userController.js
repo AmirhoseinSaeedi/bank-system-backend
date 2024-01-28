@@ -11,13 +11,9 @@ exports.getAll = asyncHandler(async (req, res, next) => {
 exports.get = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   // console.log(id + "  helllllo");
-  connection.query(
-    `SELECT * FROM user Where id = ${id}`,
-    (error, results, fields) => {
-      if (error) throw error;
-      res.render("customer_view", { results });
-    }
-  );
+  const userQuery = `SELECT * FROM user Where id = ${id}`;
+  const results = await getDataAsync(userQuery);
+  res.render("customer_view", { results });
 });
 
 exports.login = asyncHandler(async (req, res, next) => {
@@ -65,7 +61,7 @@ function getDataAsync(userDataQuery) {
   return new Promise((resolve, reject) => {
     connection.query(userDataQuery, (error, results, fields) => {
       if (error) {
-        reject(error);
+        console.log(error);
       } else {
         resolve(results);
       }
