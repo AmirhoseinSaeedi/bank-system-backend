@@ -7,4 +7,7 @@ router.get("/", user_controller.getAll);
 router.get("/:id", user_controller.get);
 
 router.post("/login", user_controller.login);
+
+router.get("/detail/:id", user_controller.detail);
+
 module.exports = router;
