@@ -2,16 +2,21 @@ extends layout
 
 block content
     //- p customers:
-    div.container-fluid.w-75()
-        table.table()
+
+    div(class='container fluid w-75 vstack')
+        h3 customers:
+        div(class='my-4') 
+            button(class='btn btn-primary') add 
+            button(class='btn btn-secondary mx-2') all transactions
+        table.table(class='mt-8')
             tr
                 //- th Id
                 th Name
                 th Last Name
                 th
+                
             each customer in results
                 tr
-                        //- a(href=`/user/${note.iduser}`) view
                 td=customer.firstname
                 td=customer.lastname
                 td
