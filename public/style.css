@@ -1,15 +1,17 @@
 body {
-  width: 100;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f8f9fa;
   /* Include padding and borders in the element's total width and height */
 }
 
 a {
   color: #00b7ff;
+  /* color: #13547f; */
 }
 
 .round-box,

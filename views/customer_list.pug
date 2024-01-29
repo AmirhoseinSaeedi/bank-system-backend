@@ -1,24 +1,21 @@
 extends layout
 
 block content
-    //- p customers:
-
-    div(class='container fluid w-75 vstack')
-        h3 customers:
+    div(class='container-fluid w-75 h-100' style='background-color: #f5f5f5; padding: 20px; border-radius: 10px;')
+        h3(style='color: #333;') Customers
         div(class='my-4') 
-            button(class='btn btn-primary') add 
-            button(class='btn btn-secondary mx-2') all transactions
-        table.table(class='mt-8')
-            tr
-                //- th Id
-                th Name
-                th Last Name
-                th
-                
-            each customer in results
-                tr
-                td=customer.firstname
-                td=customer.lastname
-                td
-                    button(type='button' class='btn btn-primary mx-3' onclick=`location.href='/user/${customer.id}'`) details
-                    button.btn.btn-outline-danger delete
+            button(class='btn btn-success') Add Customer
+            button(class='btn btn-secondary mx-2') View All Transactions
+        table.table(class='mt-4 table-striped')
+            thead
+                th(style='background-color: #13547f; color: #fff;') Name
+                th(style='background-color: #13547f; color: #fff;') Last Name
+                th(style='background-color: #13547f; color: #fff;') Actions
+            tbody
+                each customer in results
+                    tr
+                        td=customer.firstname
+                        td=customer.lastname
+                        td
+                            button(type='button' class='btn btn-primary mx-2' onclick=`location.href='/user/${customer.id}'`) Details
+                            button(type='button' class='btn btn-danger' onclick='deleteCustomer(${customer.id})') Delete
