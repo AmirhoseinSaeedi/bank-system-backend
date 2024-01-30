@@ -49,10 +49,16 @@ exports.detail = asyncHandler(async (req, res, next) => {
                         WHERE t.receiver = ${id}`;
   const depositData = await getDataAsync(depositQuery);
 
+  const withdrawalQuery = `SELECT w.id , w.amount, w.date_time, w.status, w.acceptorcode
+                            FROM withdrawal w
+                            WHERE w.userId = ${id}`;
+  const withdrawalData = await getDataAsync(withdrawalQuery);
+
   const response = {
     userData: userData[0],
     transferData: transferData,
     depositData: depositData,
+    withdrawalData: withdrawalData,
   };
   res.send(response);
 });
