@@ -10,12 +10,14 @@ block content
             thead
                 th(style='background-color: #13547f; color: #fff;') Name
                 th(style='background-color: #13547f; color: #fff;') Last Name
+                th(style='background-color: #13547f; color: #fff;') Phone number
                 th(style='background-color: #13547f; color: #fff;') Actions
             tbody
                 each customer in results
                     tr
                         td=customer.firstname
                         td=customer.lastname
+                        td=4823987
                         td
                             button(type='button' class='btn btn-primary mx-2' onclick=`location.href='/user/${customer.id}'`) Details
                             button(type='button' class='btn btn-danger' onclick='deleteCustomer(${customer.id})') Delete
