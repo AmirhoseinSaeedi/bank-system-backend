@@ -10,4 +10,6 @@ router.post("/login", user_controller.login);
 
 router.get("/:id/detail", user_controller.detail);
 
+router.post("/update/:id", user_controller.update);
+
 module.exports = router;

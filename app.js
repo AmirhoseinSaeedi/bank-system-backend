@@ -6,6 +6,7 @@ let logger = require("morgan");
 let notesRouter = require("./routes/notes");
 let userRouter = require("./routes/user");
 let indexRouter = require("./routes/index");
+let transactionRouter = require("./routes/transaction");
 const { connectToDatabase, connection } = require("./db/database");
 let app = express();
 connectToDatabase();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 app.use("/note", notesRouter);
 app.use("/user", userRouter);
+app.use("/transaction", transactionRouter);
 app.use("/", indexRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

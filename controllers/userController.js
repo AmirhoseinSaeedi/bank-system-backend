@@ -63,6 +63,25 @@ exports.detail = asyncHandler(async (req, res, next) => {
   res.send(response);
 });
 
+exports.update = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const phoneNumber = req.body.phoneNumber;
+  const nationalId = req.body.nationalId;
+
+  const updateQuery = `UPDATE user
+                        SET
+                          firstName = '${firstName}',
+                          lastName = '${lastName}',
+                          phoneNumber = '${phoneNumber}',
+                          nationalId = '${nationalId}'
+                        WHERE id = ${id};`;
+  await getDataAsync(updateQuery);
+
+  res.redirect(`/user/${id}`);
+});
+
 function getDataAsync(userDataQuery) {
   return new Promise((resolve, reject) => {
     connection.query(userDataQuery, (error, results, fields) => {

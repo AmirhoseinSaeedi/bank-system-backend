@@ -5,17 +5,26 @@ block content
         div(class='mb-3' style='background-color: #13547f; color: #fff; padding: 12px; border-radius: 8px; color: #fff;')
             if results 
                 each customer in results
-                    h5(style='margin-bottom: 6px;') Name
-                    div(class='input-group mb-2')
-                        input(id='name-input' class='form-control' disabled value=customer.firstname)
-                    h5(style='margin-bottom: 6px;') Last Name
-                    div(class='input-group mb-2')
-                        input(id='last-name-input' class='form-control' disabled value=customer.lastname)
-                    h5(style='margin-bottom: 6px;') Account Number
-                    div(class='input-group mb-2')
-                        input(id='account-number-input' class='form-control' disabled value=432423)
-                    button(id='edit-customer-btn' class='btn btn-outline-light my-2' onclick='toggleEdit("name-input")') Edit
-                        
+                    form(action="/user/update/" + customer.id  , method="post")
+                        h5(style='margin-bottom: 6px;') Name
+                        div(class='input-group mb-2')
+                            input(id='name-input' class='form-control' name="firstName" value=customer.firstname)
+                        h5(style='margin-bottom: 6px;') Last Name
+                        div(class='input-group mb-2')
+                            input(id='last-name-input' class='form-control' name="lastName"  value=customer.lastname)
+                        h5(style='margin-bottom: 6px;') Phone Number
+                        div(class='input-group mb-2')
+                            input(id='last-name-input' class='form-control' name="phoneNumber"  value=customer.phoneNumber)   
+                        h5(style='margin-bottom: 6px;') National Id
+                        div(class='input-group mb-2')
+                            input(id='last-name-input' class='form-control' name="nationalId"  value=customer.NationalId)     
+                        h5(style='margin-bottom: 6px;') Account Number
+                        div(class='input-group mb-2')
+                            input(id='account-number-input' class='form-control'  value=432423)
+
+                        //- button(id='edit-customer-btn' class='btn btn-outline-light my-2' onclick='toggleEdit("name-input")') Edit
+                        button.btn.btn-outline-dark(type=button) update
+                            
         div(class='my-4 col')
             h3(style='background-color:#333; color: #fff; padding: 10px; border-radius: 5px;') Transactions
             table(class='table table-striped')
