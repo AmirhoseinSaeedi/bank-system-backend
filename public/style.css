@@ -42,3 +42,7 @@ td {
 .login-input:focus {
   box-shadow: rgba(9, 34, 59, 0.5);
 }
+#transaction-status:hover {
+  cursor: pointer;
+  block-size: fit-content;;
+}

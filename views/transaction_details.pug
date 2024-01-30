@@ -35,4 +35,4 @@ block content
             p#transactionAmount $100.00
           div.col-md-6
             label Status:
-            p#transactionStatus.editable-status(data-toggle='tooltip' title='Click to edit' onclick="editStatus()") Success
+            p(id="transaction-status" data-clickable='true' data-toggle='tooltip' title='Click to edit' onclick="editStatus()") Success

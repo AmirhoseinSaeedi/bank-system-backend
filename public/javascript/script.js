@@ -1,4 +1,4 @@
-back = require('../../controllers/userController')
+
 function toggleEdit(customerId) {
     console.log("i am here in toggle edit")
     const firstnameInput = document.getElementById('name-input');
@@ -23,6 +23,18 @@ function toggleEdit(customerId) {
     }
 }
 
-editStatus = () =>{
-    console.log("here in transaction details page")
+editStatus = () => {
+    let status = document.getElementById('transaction-status');
+    status.contentEditable = (status.contentEditable === "true") ? "false" : "true";
+    
+    document.addEventListener('click', function(event) {
+        // Check if the clicked element is the status element or one of its ancestors
+        if (!status.contains(event.target)) {
+            // Clicked outside the status element, set contentEditable to false
+            status.contentEditable = "false";
+        }
+    });
+
+    status.focus();
 }
+
