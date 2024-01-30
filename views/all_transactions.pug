@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div.container-fluid.w-75
+    h3 All Transactions
+    hr
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Sender Name
+          th Sender Account Number
+          th Receiver Name
+          th Receiver Account Number
+          th Amount
+          th Status
+      tbody
+        tr
+          td(data-clickable='true', onclick='handleClick(this)') John Doe
+          td(data-clickable='true', onclick='handleClick(this)') 123456789
+          td(data-clickable='true', onclick='handleClick(this)') Jane Doe
+          td(data-clickable='true', onclick='handleClick(this)') 987654321
+          td(data-clickable='true', onclick='handleClick(this)') $100.00
+          td(data-clickable='true', onclick='handleClick(this)') Success
+        // Add more rows for additional transactions as needed
