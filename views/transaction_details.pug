@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  div.container-fluid.w-75
+    h3 Transaction Details
+    hr
+    div.row
+      div.col-md-6
+        h5 Sender Information
+        hr
+        div.row.mb-3
+          div.col-md-6
+            label Full Name:
+            p#senderFullName John Doe
+          div.col-md-6
+            label Account Number:
+            p#senderAccountNumber 123456789
+      div.col-md-6
+        h5 Receiver Information
+        hr
+        div.row.mb-3
+          div.col-md-6
+            label Full Name:
+            p#receiverFullName Jane Doe
+          div.col-md-6
+            label Account Number:
+            p#receiverAccountNumber 987654321
+    div.row
+      div.col-md-6
+        h5 Transaction Details
+        hr
+        div.row.mb-3
+          div.col-md-6
+            label Amount:
+            p#transactionAmount $100.00
+          div.col-md-6
+            label Status:
+            p#transactionStatus.editable-status(data-toggle='tooltip' title='Click to edit' onclick="editStatus()") Success

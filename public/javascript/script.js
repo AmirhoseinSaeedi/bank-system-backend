@@ -22,3 +22,7 @@ function toggleEdit(customerId) {
         }
     }
 }
+
+editStatus = () =>{
+    console.log("here in transaction details page")
+}
