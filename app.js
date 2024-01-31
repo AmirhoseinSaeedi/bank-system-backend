@@ -8,6 +8,17 @@ let userRouter = require("./routes/user");
 let indexRouter = require("./routes/index");
 let transactionRouter = require("./routes/transaction");
 const { connectToDatabase, connection } = require("./db/database");
+const blockStyleCSS = (req, res, next) => {
+  if (
+    req.url.includes("style.css") ||
+    req.url.includes("favicon") ||
+    req.url.includes("fonts")
+  ) {
+    res.send({ hello: "hello" });
+  } else {
+    next();
+  }
+};
 let app = express();
 connectToDatabase();
 app.use(express.static(path.join(__dirname, "public")));
@@ -16,7 +27,7 @@ app.use(express.static("css"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(logger("dev"));
-app.get("/user/style.css", (req, res) => res.send({ hello: "hello" }));
+app.use(blockStyleCSS);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
