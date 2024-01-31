@@ -46,3 +46,6 @@ td {
   cursor: pointer;
   block-size: fit-content;;
 }
+td[data-clickable="true"]:hover {
+  cursor: pointer;
+}

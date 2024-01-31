@@ -19,7 +19,7 @@ exports.getAll = asyncHandler(async (req, res, next) => {
     transactionData: transactionData,
     withdrawalData: withdrawalData,
   };
-  res.send(response);
+  res.render('all_transactions',{response});
 });
 
 exports.getTtansfer = asyncHandler(async (req, res, next) => {
@@ -36,13 +36,15 @@ exports.getTtansfer = asyncHandler(async (req, res, next) => {
 
 exports.getWithdrawal = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
+  console.log(id)
   const withdrawalQuery = `SELECT w.amount, w.status, w.date_time, w.acceptorcode, u.firstName as user_firstName, 
                             u.lastName as user_lastName
                             FROM withdrawal w
                             JOIN user u ON w.userId = u.id
                             where w.id=${id}`;
   const withdrawalData = await getDataAsync(withdrawalQuery);
-  res.send(withdrawalData[0]);
+  const data = withdrawalData[0];
+  res.render('transaction_details',{data});
 });
 
 function getDataAsync(userDataQuery) {
