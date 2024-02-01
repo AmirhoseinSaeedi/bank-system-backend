@@ -4,6 +4,7 @@ const asyncHandler = require("express-async-handler");
 exports.getAll = asyncHandler(async (req, res, next) => {
   connection.query("SELECT * FROM user", (error, results, fields) => {
     if (error) throw error;
+    // res.send(results);
     res.render("customer_list", { results });
   });
 });
@@ -13,6 +14,7 @@ exports.get = asyncHandler(async (req, res, next) => {
   // console.log(id + "  helllllo");
   const userQuery = `SELECT * FROM user Where id = ${id}`;
   const results = await getDataAsync(userQuery);
+  // res.send(results);
   res.render("customer_view", { results });
 });
 
@@ -79,7 +81,47 @@ exports.update = asyncHandler(async (req, res, next) => {
                         WHERE id = ${id};`;
   await getDataAsync(updateQuery);
 
-  res.redirect(`/user/${id}`);
+  res.redirect(`/user/get/${id}`);
+});
+
+// in api ro vqti call mikni k user roo button create Customer click mikne
+exports.createUser = asyncHandler(async (req, res, next) => {
+  res.send({ hello: "get create" });
+});
+
+exports.create = asyncHandler(async (req, res, next) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const phoneNumber = req.body.phoneNumber;
+  const nationalId = req.body.nationalId;
+  const userName = req.body.userName;
+  const password = req.body.password;
+  const isAdimn = req.body.isAdmin;
+
+  const error = [];
+
+  const duplicateUserName = `SELECT * FROM user where username='${userName}'`;
+  const duplicateUserNameData = await getDataAsync(duplicateUserName);
+
+  const duplicateNationalId = `SELECT * FROM user where nationalId='${nationalId}'`;
+  const duplicateNationalIdData = await getDataAsync(duplicateNationalId);
+
+  if (duplicateUserNameData.length > 0) {
+    error.push("Please Enter another User Name");
+  }
+  if (duplicateNationalIdData.length > 0) {
+    error.push("some one else is in database with this national Id");
+  }
+  if (error.length > 0) {
+    res.send(error);
+    // dobare b safhe createUser bar migrde v bayad error ro nshon bde
+  }
+
+  const INSERTQuery = ` INSERT user (firstname, lastname, username, password, phoneNumber, NationalId, isAdmin)
+                          VALUES ('${firstName}', '${lastName}', '${userName}', '${password}', '${phoneNumber}', '${nationalId}', '${isAdimn}')`;
+  await getDataAsync(INSERTQuery);
+
+  res.redirect(`/user/getAll`);
 });
 
 function getDataAsync(userDataQuery) {
