@@ -19,7 +19,8 @@ exports.getAll = asyncHandler(async (req, res, next) => {
     transactionData: transactionData,
     withdrawalData: withdrawalData,
   };
-  res.render('all_transactions',{response});
+  // res.send(response);
+  res.render("all_transactions", { response });
 });
 
 exports.getTtansfer = asyncHandler(async (req, res, next) => {
@@ -36,7 +37,7 @@ exports.getTtansfer = asyncHandler(async (req, res, next) => {
 
 exports.getWithdrawal = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
-  console.log(id)
+  console.log(id);
   const withdrawalQuery = `SELECT w.amount, w.status, w.date_time, w.acceptorcode, u.firstName as user_firstName, 
                             u.lastName as user_lastName
                             FROM withdrawal w
@@ -44,7 +45,37 @@ exports.getWithdrawal = asyncHandler(async (req, res, next) => {
                             where w.id=${id}`;
   const withdrawalData = await getDataAsync(withdrawalQuery);
   const data = withdrawalData;
-  res.render('transaction_details',{data});
+  res.render("transaction_details", { data });
+});
+
+exports.createTransferPage = asyncHandler(async (req, res, next) => {
+  // render krdn safhe create transfer
+  // res.render('transaction_details',{data});
+  res.send({ hello: "hello" });
+});
+
+exports.createTransfer = asyncHandler(async (req, res, next) => {
+  const senderUserName = req.body.senderUserName;
+  const reciverUserName = req.body.reciverUserName;
+  const amount = req.body.amount;
+
+  const senderIdQuery = `SELECT id FROM user where username='${senderUserName}'`;
+  const senderId = await getDataAsync(senderIdQuery);
+
+  const reciverIdQuery = `SELECT id FROM user where username='${reciverUserName}'`;
+  const receiverId = await getDataAsync(reciverIdQuery);
+  console.log(receiverId);
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  const createTransferQuery = `INSERT transfer (amount, date, sender, receiver, status) 
+                                  values(${amount}, '${formattedDate}', ${senderId[0].id}, ${receiverId[0].id}, 'processing' )`;
+  await getDataAsync(createTransferQuery);
+
+  res.redirect("/transaction");
 });
 
 function getDataAsync(userDataQuery) {
