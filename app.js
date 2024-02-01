@@ -9,6 +9,7 @@ let indexRouter = require("./routes/index");
 let transactionRouter = require("./routes/transaction");
 const { connectToDatabase, connection } = require("./db/database");
 const blockStyleCSS = (req, res, next) => {
+  console.log(req.uri);
   if (
     req.url.includes("style.css") ||
     req.url.includes("favicon") ||
