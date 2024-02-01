@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    div(class='container-fluid w-75 h-100' style='background-color: #f5f5f5; padding: 20px; border-radius: 10px;')
+    div(class='container-fluid w-75 h-100', style='background-color: #f5f5f5; padding: 20px; border-radius: 10px;')
         h3(style='color: #333;') Customers
         div(class='my-4') 
             button(class='btn btn-success') Add Customer
@@ -19,9 +19,8 @@ block content
                         td=customer.lastname
                         td=customer.phoneNumber
                         td
-                            button(type='button' class='btn btn-primary mx-2' onclick=`location.href='/user/${customer.id}'`) Details
-                            button(type='button' class='btn btn-danger' onclick='deleteCustomer(${customer.id})') Delete
+                            button(type='button' class='btn btn-primary mx-2' onclick=`location.href='/user/get/${customer.id}'`) Details
+                            button(type='button' class='btn btn-danger', onclick=`deleteCustomer('${customer.id}')`) Delete
         p
-          This is some text
-          i(class="fa fa-pencil-square-o" aria-hidden="true")
-    
+            This is some text
+            i(class="fa fa-pencil-square-o" aria-hidden="true")

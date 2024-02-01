@@ -2,11 +2,14 @@ const { connection } = require("../db/database");
 const asyncHandler = require("express-async-handler");
 
 exports.getAll = asyncHandler(async (req, res, next) => {
-  connection.query("SELECT * FROM user", (error, results, fields) => {
-    if (error) throw error;
-    // res.send(results);
-    res.render("customer_list", { results });
-  });
+  connection.query(
+    "SELECT * FROM user where isdeleted=0",
+    (error, results, fields) => {
+      if (error) throw error;
+      // res.send(results);
+      res.render("customer_list", { results });
+    }
+  );
 });
 
 exports.get = asyncHandler(async (req, res, next) => {
@@ -23,7 +26,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   const password = req.body.password;
 
   var user = connection.query(
-    `SELECT * FROM user where username='${userName}' AND password='${password}'`,
+    `SELECT * FROM user where username='${userName}' AND password='${password} AND isdeleted=0'`,
     (error, results, fields) => {
       if (error) throw error;
       if (results[0].isAdmin == 1) {
@@ -122,6 +125,14 @@ exports.create = asyncHandler(async (req, res, next) => {
   await getDataAsync(INSERTQuery);
 
   res.redirect(`/user/getAll`);
+});
+
+exports.delete = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  // console.log(id + "  helllllo");
+  const deleteQuery = `update user set isdeleted=1 where id=${id}`;
+  const results = await getDataAsync(deleteQuery);
+  res.send(200);
 });
 
 function getDataAsync(userDataQuery) {
