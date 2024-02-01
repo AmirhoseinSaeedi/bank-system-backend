@@ -1,17 +1,31 @@
 extends layout
 
 block content
-
-    //- to do change the action
-
     form(action='/note/create',method='post')
-        div(class='create-main-box')
+        div(class='w-25' style ='margin: 20px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box;')
             p Name
             div(class='')
-                input(class="form-control" type='text' name='title' style='width:27vw')
+                input(class="form-control" type='text' name='title' )
             p Last Name
             div(class='')
-                input(class='form-control' type="text")(name="text", cols="30", rows="10" style='width:27vw') 
+                input(class='form-control' type="text"name="text") 
+
+            p User Name
             div(class='')
-                input(class='btn btn-outline-dark' type='submit' value='Create Note' style='margin-top:20px') 
+                input(class='form-control' type="text"name="text") 
+
+            p Password
+            div(class='')
+                input(class='form-control' type="text"name="text") 
+
+            p Phone Number
+            div(class='')
+                input(class='form-control' type="text"name="text") 
+
+            p National Code
+            div(class='')
+                input(class='form-control' type="text"name="text") 
+
+            div(class='')
+                input(class='btn btn-outline-dark mt-4' type='submit' value='Create Note') 
 

@@ -43,7 +43,7 @@ exports.getWithdrawal = asyncHandler(async (req, res, next) => {
                             JOIN user u ON w.userId = u.id
                             where w.id=${id}`;
   const withdrawalData = await getDataAsync(withdrawalQuery);
-  const data = withdrawalData[0];
+  const data = withdrawalData;
   res.render('transaction_details',{data});
 });
 

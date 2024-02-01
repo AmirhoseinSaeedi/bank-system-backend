@@ -2,9 +2,9 @@ extends layout
 
 block content
   div.container-fluid.w-75
-    h3 Cashier Details
+    h3 Transfer Details
     hr
-    each transfer in data
+    each transfer in transactionData
       div.row
         div.col-md-6
           h5 Sender Information
@@ -12,28 +12,32 @@ block content
           div.row.mb-3
             div.col-md-6
               label Full Name:
-              p#senderFullName=transfer.user_firstName +' '+ transfer.user_lastName
+              p#senderFullName=transfer.sender_firstName + ' ' + transfer.sender_lastName
             div.col-md-6
               label Account Number:
               p#senderAccountNumber 123456789
-        div.col-md-6.text-center
-          h5 Acceptor Information
+        div.col-md-6
+          h5 Receiver Information
           hr
           div.row.mb-3
             div.col-md-6
-              label Acceptor Code:
-              p#receiverFullName=transfer.acceptorcode
+              label Full Name:
+              p#receiverFullName=transfer.receiver_firstName + ' ' +transfer.receiver_lastName
+            div.col-md-6
+              label Account Number:
+              p#receiverAccountNumber 987654321
       div.row
-        div.col-md-12
+        div.col-md-6
           h5 Transaction Details
           hr
           div.row.mb-3
-            div.col-md-4
+            div.col-md-6
               label Amount:
               p#transactionAmount=transfer.amount
-            div.col-md-4
+            div.col-md-6
               label Date:
-              p#transactionDate=transfer.date_time
-            div.col-md-4
+              p#transactionDate=transfer.date
+            div.col-md-6
               label Status:
               p(id="transaction-status" data-clickable='true' data-toggle='tooltip' title='Click to edit' onclick="editStatus()") Success
+                i(class="fa fa-pencil-square-o" aria-hidden="true")
