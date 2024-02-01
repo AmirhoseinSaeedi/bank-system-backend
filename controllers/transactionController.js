@@ -78,6 +78,52 @@ exports.createTransfer = asyncHandler(async (req, res, next) => {
   res.redirect("/transaction");
 });
 
+exports.createWithdrawalPage = asyncHandler(async (req, res, next) => {
+  // render krdn safhe create transfer
+  // res.render('transaction_details',{data});
+  res.send({ hello: "hello" });
+});
+
+exports.createWithdrawal = asyncHandler(async (req, res, next) => {
+  const cashierUserName = req.body.cashierUserName;
+  const acceptorcode = req.body.acceptorcode;
+  const amount = req.body.amount;
+
+  const cashierIdQuery = `SELECT id FROM user where username='${cashierUserName}'`;
+  const cashieId = await getDataAsync(cashierIdQuery);
+
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  const createWithdrawalrQuery = `INSERT withdrawal (amount, date_time, userId, acceptorcode , status) 
+                                  values(${amount}, '${formattedDate}', ${cashieId[0].id}, '${acceptorcode}', 'processing' )`;
+  await getDataAsync(createWithdrawalrQuery);
+
+  res.redirect("/transaction");
+});
+
+exports.editTransferStatus = asyncHandler(async (req, res, next) => {
+  const id = req.body.id;
+  const status = req.body.status;
+
+  const updateTransferQuery = `Update transfer
+                                Set status='${status}' WHERE id = ${id}`;
+  await getDataAsync(updateTransferQuery);
+  res.redirect("/transaction");
+});
+
+exports.editWithdrawalStatus = asyncHandler(async (req, res, next) => {
+  const id = req.body.id;
+  const status = req.body.status;
+
+  const updateWithdrawalQuery = `Update Withdrawal
+                                Set status='${status}' WHERE id = ${id}`;
+  await getDataAsync(updateWithdrawalQuery);
+  res.redirect("/transaction");
+});
 function getDataAsync(userDataQuery) {
   return new Promise((resolve, reject) => {
     connection.query(userDataQuery, (error, results, fields) => {
