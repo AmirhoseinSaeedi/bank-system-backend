@@ -2,7 +2,7 @@ extends layout
 
 block content
     form(action='/note/create',method='post')
-        div(class='mx-auto' style ='margin: 20px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box; width:30%')
+        div(class='mx-auto w-25' style ='margin: 20px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box;')
             p Name
             div(class='')
                 input(class="form-control" type='text' name='Name' )
@@ -21,11 +21,6 @@ block content
             p National Code
             div(class='')
                 input(class='form-control' type="text" name="NationalCode") 
-
-            p is Admin
-            div(class='')
-                input(class='form-control' type="text" name="isAdmin") 
-
             div(class='')
                 input(class='btn btn-outline-dark mt-4' type='submit' value='Create Note') 
 

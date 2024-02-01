@@ -24,7 +24,7 @@ block content
           td()=transaction.date_time
           td()=transaction.amount
           td 
-            button(class='btn btn-primary' onclick=`location.href='/transaction/withdrawal/${transaction.id}'`) Details
+            button(class='btn btn-primary' onclick=`location.href='/transaction/withdrawal/get/${transaction.id}'`) Details
 
     h4.mt-5 transfers:
     hr
@@ -49,4 +49,4 @@ block content
           td()=transaction.date_time
           td()=transaction.amount
           td 
-            button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/${transaction.id}'`) Details
+            button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/get/${transaction.id}'`) Details

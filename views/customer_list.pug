@@ -4,8 +4,8 @@ block content
     div(class='container-fluid w-75 h-100', style='background-color: #f5f5f5; padding: 20px; border-radius: 10px;')
         h3(style='color: #333;') Customers
         div(class='my-4') 
-            button(class='btn btn-success') Add Customer
-            button(class='btn btn-secondary mx-2') View All Transactions
+            button(onclick=`location.href='/user/createUser'` class='btn btn-success') Add Customer
+            button(onclick=`location.href='/transaction/'` class='btn btn-secondary mx-2') View All Transactions
         table.table(class='mt-4 table-striped')
             thead
                 th(style='background-color: #13547f; color: #fff;') Name
