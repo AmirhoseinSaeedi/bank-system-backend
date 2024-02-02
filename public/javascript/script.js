@@ -1,3 +1,5 @@
+const { createUser } = require("../../controllers/userController");
+
 function toggleEdit(customerId) {
   console.log("i am here in toggle edit");
   const firstnameInput = document.getElementById("name-input");
@@ -62,3 +64,16 @@ function deleteCustomer(id) {
       // Handle error, e.g., show an error message
     });
 }
+
+// sendUserData = () =>{
+  
+//   const firstName = document.getElementById("firstName").value;
+//   const lastName = document.getElementById('lastName').value;
+//   const phoneNumber = document.getElementById('phoneNumber').value;
+//   const nationalId = document.getElementById('nationalId').value;
+//   const userName = document.getElementById('userName').value;
+//   const password = document.getElementById('password').value;
+//   const isAdimn = document.getElementById('isAdmin').value;
+
+//   console.log(firstName)
+// }

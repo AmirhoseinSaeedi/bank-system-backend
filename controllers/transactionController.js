@@ -51,7 +51,7 @@ exports.getWithdrawal = asyncHandler(async (req, res, next) => {
 exports.createTransferPage = asyncHandler(async (req, res, next) => {
   // render krdn safhe create transfer
   // res.render('transaction_details',{data});
-  res.send({ hello: "hello" });
+  res.render("add_transfer");
 });
 
 exports.createTransfer = asyncHandler(async (req, res, next) => {
@@ -81,7 +81,7 @@ exports.createTransfer = asyncHandler(async (req, res, next) => {
 exports.createWithdrawalPage = asyncHandler(async (req, res, next) => {
   // render krdn safhe create transfer
   // res.render('transaction_details',{data});
-  res.send({ hello: "hello" });
+  res.render('add_withdrawal');
 });
 
 exports.createWithdrawal = asyncHandler(async (req, res, next) => {

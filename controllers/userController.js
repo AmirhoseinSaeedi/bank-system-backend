@@ -89,7 +89,7 @@ exports.update = asyncHandler(async (req, res, next) => {
 
 // in api ro vqti call mikni k user roo button create Customer click mikne
 exports.createUser = asyncHandler(async (req, res, next) => {
-  res.send({ hello: "get create" });
+  res.render('customer_create');
 });
 
 exports.create = asyncHandler(async (req, res, next) => {
