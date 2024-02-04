@@ -2,14 +2,16 @@ const { connection } = require("../db/database");
 const asyncHandler = require("express-async-handler");
 
 exports.getAll = asyncHandler(async (req, res, next) => {
-  connection.query(
-    "SELECT * FROM user where isdeleted=0",
-    (error, results, fields) => {
-      if (error) throw error;
-      // res.send(results);
-      res.render("customer_list", { results });
-    }
-  );
+  // connection.query(
+  //   "SELECT * FROM user where isdeleted=0",
+  //   (error, results, fields) => {
+  //     if (error) throw error;
+  //     // res.send(results);
+  //     res.render("customer_list", { results });
+  //   }
+  // );
+
+  res.render('choose_transaction')
 });
 
 exports.get = asyncHandler(async (req, res, next) => {

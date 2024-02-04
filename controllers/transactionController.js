@@ -89,6 +89,8 @@ exports.createWithdrawal = asyncHandler(async (req, res, next) => {
   const acceptorcode = req.body.acceptorcode;
   const amount = req.body.amount;
 
+  console.log(cashierUserName)
+
   const cashierIdQuery = `SELECT id FROM user where username='${cashierUserName}'`;
   const cashieId = await getDataAsync(cashierIdQuery);
 

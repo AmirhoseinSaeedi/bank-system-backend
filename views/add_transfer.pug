@@ -1,16 +1,16 @@
 extends layout
 
 block content
-    form(action='/transaction/create', method='post')
+    form(action='/transaction/transfer/create', method='post')
         div(class='mx-auto' style='margin: 20px; padding: 20px; border: 1px solid black; border-radius: 15px; background-color: antiquewhite; box-sizing: border-box; width: 30%')
             h4 Create Transfer
             hr
             p Sender Username
             div(class='')
-                input(class="form-control" type='text' name='sender_username')
+                input(class="form-control" type='text' name='senderUserName')
             p Receiver Username
             div(class='')
-                input(class='form-control' type="text" name="receiver_username")
+                input(class='form-control' type="text" name="reciverUserName")
             p Amount
             div(class='')
                 input(class='form-control' type="text" name="amount")
