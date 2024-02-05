@@ -1,11 +1,15 @@
 extends layout
 
 block content
-    form(action='/transaction/transfer/create', method='post')
+
+    form(action='/transaction/transfer/customer/create', method='post')
         div(class='mx-auto' style='margin: 20px; padding: 20px; border: 1px solid black; border-radius: 15px; background-color: antiquewhite; box-sizing: border-box; width: 30%')
             h4 Create Transfer
             hr
-            p Receiver Username
+            p Sender User Name
+            div(class='')
+                input(class='form-control' type="text" name='senderUserName' readonly='true' value=`${result.userName}`)
+            p Receiver User Name    
             div(class='')
                 input(class='form-control' type="text" name="reciverUserName")
             p Amount

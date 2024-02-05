@@ -3,7 +3,6 @@ let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
-let notesRouter = require("./routes/notes");
 let userRouter = require("./routes/user");
 let indexRouter = require("./routes/index");
 let transactionRouter = require("./routes/transaction");
@@ -33,7 +32,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/note", notesRouter);
 app.use("/user", userRouter);
 app.use("/transaction", transactionRouter);
 app.use("/", indexRouter);

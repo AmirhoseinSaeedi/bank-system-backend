@@ -1,38 +1,37 @@
 extends layout
 
 block content
+
     div(class='container-fluid w-75')
-        div(class='mb-3' style='background-color: #40A2E3; padding: 12px; border-radius: 8px; color: #333;')
+        div(class='mb-3' style='background-color: #f0f0f0; padding: 12px; border-radius: 8px; color: #333;')
             if response.userData 
                 each customer in response.userData
-                    form(action="/user/update/" + customer.id  , method="post")
+                    form(action="/user/update/" + customer.id, method="post")
                         h5(style='margin-bottom: 6px;') Name
                         div(class='input-group mb-2')
                             input(id='name-input' class='form-control' name="firstName" value=customer.firstname)
                         h5(style='margin-bottom: 6px;') Last Name
                         div(class='input-group mb-2')
-                            input(id='last-name-input' class='form-control' name="lastName"  value=customer.lastname)
+                            input(id='last-name-input' class='form-control' name="lastName" value=customer.lastname)
                         h5(style='margin-bottom: 6px;') Phone Number
                         div(class='input-group mb-2')
-                            input(id='last-name-input' class='form-control' name="phoneNumber"  value=customer.phoneNumber)   
+                            input(id='last-name-input' class='form-control' name="phoneNumber" value=customer.phoneNumber)
                         h5(style='margin-bottom: 6px;') National Id
                         div(class='input-group mb-2')
-                            input(id='last-name-input' class='form-control' name="nationalId"  value=customer.NationalId)     
+                            input(id='last-name-input' class='form-control' name="nationalId" value=customer.NationalId)
                         h5(style='margin-bottom: 6px;') User Name
                         div(class='input-group mb-2')
                             input(id='account-number-input' class='form-control' value=customer.username)
-
-                        //- button(id='edit-customer-btn' class='btn btn-outline-light my-2' onclick='toggleEdit("name-input")') Edit
-                        button.btn.btn-outline-dark(type=button) update
-
-
-
-    div.container-fluid.w-75.h-100
+                        button.btn.btn-outline-dark(type='button') Update
+    div(class='container-fluid w-75 mt-4')
+        button.btn.btn-success(type='button' onclick=`location.href='/transaction/withdrawal/customer/createPage/${response.userData[0].username}'`) Create Withdrawal
+        button.btn.btn-primary.mx-2(type='button' onclick=`location.href='/transaction/transfer/customer/createPage/${response.userData[0].username}'`) Create Transaction
+    div(class='container-fluid w-75 h-100' style='background-color: #f5f5f5; padding: 20px; border-radius: 10px;')
         h3.mt-5 All Transactions:
         hr
         br
         br
-        h4 withdrawal:
+        h4 Withdrawals:
         hr
         table.table.table-striped.table-hover
             thead
@@ -44,8 +43,8 @@ block content
                     th Status
                     th
             tbody
-                if response.withdrawalData 
-                    each transaction in response.withdrawalData 
+                if response.withdrawalData
+                    each transaction in response.withdrawalData
                         tr
                             td()=response.userData[0].firstname
                             td()=response.userData[0].lastname
@@ -55,15 +54,15 @@ block content
                             td 
                                 button(class='btn btn-primary' onclick=`location.href='/transaction/withdrawal/get/${transaction.id}'`) Details
 
-        h4.mt-5 transfers:
+        h4.mt-5 Transfers:
         hr
         table.table.table-striped.table-hover
             thead
                 tr
                     th Sender Name
                     th Sender Last Name
-                    th Reciever Name
-                    th Reciever Last Name
+                    th Receiver Name
+                    th Receiver Last Name
                     th Date
                     th Amount
                     th Status
@@ -71,26 +70,26 @@ block content
             tbody
                 if response.transferData
                     each transaction in response.transferData
-                            tr
+                        tr
                             td()=response.userData[0].firstname
                             td()=response.userData[0].lastname
                             td()=transaction.receiver_firstName
                             td()=transaction.receiver_lastName
-
                             td()=transaction.date
                             td()=transaction.amount
                             td=transaction.status
                             td 
                                 button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/get/${transaction.id}'`) Details
-        h4.mt-5 Deposit:
+
+        h4.mt-5 Deposits:
         hr
         table.table.table-striped.table-hover
             thead
                 tr
                     th Sender Name
                     th Sender Last Name
-                    th Reciever Name
-                    th Reciever Last Name
+                    th Receiver Name
+                    th Receiver Last Name
                     th Date
                     th Amount
                     th Status
@@ -98,19 +97,15 @@ block content
             tbody
                 if response.depositData
                     each transaction in response.depositData
-                            tr
+                        tr
                             td()=transaction.sender_firstName
                             td()=transaction.sender_lastName
-
                             td()=response.userData[0].firstname
                             td()=response.userData[0].lastname
-
                             td()=transaction.date
-                            td()=transaction.amount
+                                td()=transaction.amount
                             td=transaction.status
                             td 
                                 button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/get/${transaction.id}'`) Details
-            
-            
 
-            
+

@@ -1,26 +1,26 @@
 extends layout
 
 block content
-    form(action='/note/create',method='post')
-        div(class='mx-auto w-25' style ='margin: 20px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box;')
+    form(action='/signin/create' method='post')
+        div(class='w-100' style ='margin: 20px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box; width:30%')
             p Name
             div(class='')
-                input(class="form-control" type='text' name='Name' )
+                input(id='firstName' class="form-control" type='text' name='firstName' )
             p Last Name
             div(class='')
-                input(class='form-control' type="text" name="lastName") 
+                input(id='lastName' class='form-control' type="text" name="lastName") 
             p User Name
             div(class='')
-                input(class='form-control' type="text" name="userName") 
+                input(id='userName' class='form-control' type="text" name="userName") 
             p Password
             div(class='')
-                input(class='form-control' type="text" name="Password") 
+                input(id='password' class='form-control' type="text" name="password") 
             p Phone Number
             div(class='')
-                input(class='form-control' type="text" name="PhoneNumber") 
+                input(id='phoneNumber' class='form-control' type="text" name="phoneNumber") 
             p National Code
             div(class='')
-                input(class='form-control' type="text" name="NationalCode") 
-            div(class='')
-                input(class='btn btn-outline-dark mt-4' type='submit' value='Create Note') 
+                input(id='nationalId' class='form-control' type="text" name="nationalId") 
 
+            div(class='')
+                input(class='btn btn-outline-dark mt-4' type='submit') 

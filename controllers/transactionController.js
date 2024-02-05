@@ -111,10 +111,6 @@ exports.editTransferStatus = asyncHandler(async (req, res, next) => {
   const id = req.body.id;
   const status = req.body.status;
 
-  console.log("looooooooooook");
-  console.log(id);
-  console.log(status);
-
   const updateTransferQuery = `Update transfer
                                 Set status='${status}' WHERE id = ${id}`;
   await getDataAsync(updateTransferQuery);

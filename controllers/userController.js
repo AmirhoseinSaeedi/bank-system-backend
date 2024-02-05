@@ -66,13 +66,13 @@ exports.detail = asyncHandler(async (req, res, next) => {
   const withdrawalData = await getDataAsync(withdrawalQuery);
 
   const response = {
-    userData: userData[0],
+    userData: userData,
     transferData: transferData,
     depositData: depositData,
     withdrawalData: withdrawalData,
   };
   // safhe makhsoose admin detail
-  res.send(response);
+  res.render('customer_view',{response});
 });
 
 exports.update = asyncHandler(async (req, res, next) => {
@@ -158,13 +158,13 @@ exports.detailForCustomer = asyncHandler(async (req, res, next) => {
   const withdrawalData = await getDataAsync(withdrawalQuery);
 
   const response = {
-    userData: userData[0],
+    userData: userData,
     transferData: transferData,
     depositData: depositData,
     withdrawalData: withdrawalData,
   };
   // safhe makhsoose karbar detail
-  res.send(response);
+  res.render("customer_main_page",{response});
 });
 
 exports.delete = asyncHandler(async (req, res, next) => {

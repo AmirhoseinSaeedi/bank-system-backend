@@ -46,7 +46,7 @@ block content
           td()=transaction.receiver_firstName
           td()=transaction.receiver_lastName
 
-          td()=transaction.date_time
+          td()=transaction.date
           td()=transaction.amount
           td 
             button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/get/${transaction.id}'`) Details

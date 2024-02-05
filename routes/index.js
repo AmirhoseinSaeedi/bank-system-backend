@@ -6,8 +6,8 @@ router.get("/", function (req, res, next) {
   res.render("login");
 });
 
-router.get("/", function (req, res, next) {
-  res.render("signin");
+router.get("/signin", function (req, res, next) {
+  res.render("customer_signin");
 });
 
 router.post("/signin/create", index_controller.create);
