@@ -26,16 +26,20 @@ exports.get = asyncHandler(async (req, res, next) => {
 exports.login = asyncHandler(async (req, res, next) => {
   const userName = req.body.username;
   const password = req.body.password;
-
-  var user = connection.query(
-    `SELECT * FROM user where username='${userName}' AND password='${password} AND isdeleted=0'`,
-    (error, results, fields) => {
-      if (error) throw error;
-      if (results[0].isAdmin == 1) {
-        res.render("admin");
-      }
-    }
-  );
+  console.log(userName);
+  console.log(password);
+  const getUserQuery = `SELECT * FROM user where username='${userName}' AND password='${password}' AND isdeleted=0`;
+  console.log(getUserQuery);
+  const user = await getDataAsync(getUserQuery);
+  console.log(user);
+  const id = user[0].id;
+  if (user[0].isAdmin == 1) {
+    res.redirect("/user/getAll");
+  } else {
+    res.redirect(`/user/${id}/customer/detail`);
+    // safle deatili k makhsoos gheire admine bayad call bshe
+    // res.redirect(`/user/${id}/detail`);
+  }
 });
 
 exports.detail = asyncHandler(async (req, res, next) => {
@@ -67,6 +71,7 @@ exports.detail = asyncHandler(async (req, res, next) => {
     depositData: depositData,
     withdrawalData: withdrawalData,
   };
+  // safhe makhsoose admin detail
   res.send(response);
 });
 
@@ -86,12 +91,12 @@ exports.update = asyncHandler(async (req, res, next) => {
                         WHERE id = ${id};`;
   await getDataAsync(updateQuery);
 
-  res.redirect(`/user/get/${id}`);
+  res.redirect(`/user/${id}/detail`);
 });
 
 // in api ro vqti call mikni k user roo button create Customer click mikne
 exports.createUser = asyncHandler(async (req, res, next) => {
-  res.render('customer_create');
+  res.render("customer_create");
 });
 
 exports.create = asyncHandler(async (req, res, next) => {
@@ -127,6 +132,39 @@ exports.create = asyncHandler(async (req, res, next) => {
   await getDataAsync(INSERTQuery);
 
   res.redirect(`/user/getAll`);
+});
+
+exports.detailForCustomer = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+
+  const userDataQuery = `SELECT * FROM user Where id = ${id}`;
+  const userData = await getDataAsync(userDataQuery);
+
+  const transferQuery = `SELECT t.id , t.amount, t.date, t.status, u.firstName AS receiver_firstName, u.lastName AS receiver_lastName
+                        FROM transfer t
+                        JOIN user u ON t.receiver = u.id
+                        WHERE t.sender = ${id}`;
+  const transferData = await getDataAsync(transferQuery);
+
+  const depositQuery = `SELECT t.id , t.amount, t.date, t.status, u.firstName AS sender_firstName, u.lastName AS sender_lastName
+                        FROM transfer t
+                        JOIN user u ON t.sender = u.id
+                        WHERE t.receiver = ${id}`;
+  const depositData = await getDataAsync(depositQuery);
+
+  const withdrawalQuery = `SELECT w.id , w.amount, w.date_time, w.status, w.acceptorcode
+                            FROM withdrawal w
+                            WHERE w.userId = ${id}`;
+  const withdrawalData = await getDataAsync(withdrawalQuery);
+
+  const response = {
+    userData: userData[0],
+    transferData: transferData,
+    depositData: depositData,
+    withdrawalData: withdrawalData,
+  };
+  // safhe makhsoose karbar detail
+  res.send(response);
 });
 
 exports.delete = asyncHandler(async (req, res, next) => {

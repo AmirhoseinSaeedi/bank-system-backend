@@ -32,7 +32,7 @@ exports.getTtansfer = asyncHandler(async (req, res, next) => {
                           JOIN user u2 ON t.receiver = u2.id
                           where t.id = ${id}`;
   const transactionData = await getDataAsync(transactionQuery);
-  res.render('transfer_details',{transactionData});
+  res.render("transfer_details", { transactionData });
 });
 
 exports.getWithdrawal = asyncHandler(async (req, res, next) => {
@@ -81,7 +81,7 @@ exports.createTransfer = asyncHandler(async (req, res, next) => {
 exports.createWithdrawalPage = asyncHandler(async (req, res, next) => {
   // render krdn safhe create transfer
   // res.render('transaction_details',{data});
-  res.render('add_withdrawal');
+  res.render("add_withdrawal");
 });
 
 exports.createWithdrawal = asyncHandler(async (req, res, next) => {
@@ -89,7 +89,7 @@ exports.createWithdrawal = asyncHandler(async (req, res, next) => {
   const acceptorcode = req.body.acceptorcode;
   const amount = req.body.amount;
 
-  console.log(cashierUserName)
+  console.log(cashierUserName);
 
   const cashierIdQuery = `SELECT id FROM user where username='${cashierUserName}'`;
   const cashieId = await getDataAsync(cashierIdQuery);
@@ -111,7 +111,7 @@ exports.editTransferStatus = asyncHandler(async (req, res, next) => {
   const id = req.body.id;
   const status = req.body.status;
 
-  console.log("looooooooooook")
+  console.log("looooooooooook");
   console.log(id);
   console.log(status);
 
@@ -131,7 +131,6 @@ exports.editWithdrawalStatus = asyncHandler(async (req, res, next) => {
   res.redirect("/transaction");
 });
 
-
 exports.SingleUserTransactions = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;
   const transactionQuery = `SELECT t.id , t.amount, t.date, t.status, u1.firstName AS sender_firstName,
@@ -139,8 +138,7 @@ exports.SingleUserTransactions = asyncHandler(async (req, res, next) => {
                           FROM transfer t
                           JOIN user u1 ON t.sender = u1.id
                           JOIN user u2 ON t.receiver = u2.id
-                          WHERE u1.id = ${userId} and u1.isdeleted=0`
-                          ;
+                          WHERE u1.id = ${userId} and u1.isdeleted=0`;
   const transactionData = await getDataAsync(transactionQuery);
 
   const WithdrawalQuery = `SELECT w.id , w.amount, w.status, w.date_time, w.acceptorcode, u.firstName as user_firstName, 
@@ -158,7 +156,70 @@ exports.SingleUserTransactions = asyncHandler(async (req, res, next) => {
   // res.render('customer_view',{response});
 });
 
+exports.createTransferPageForCustomer = asyncHandler(async (req, res, next) => {
+  // render krdn safhe create transfer
+  // res.render('transaction_details',{data});
+  const userName = req.params.username;
+  const result = { userName: userName };
+  res.render("user_transter_create", { result });
+});
 
+exports.createTransferForCustomer = asyncHandler(async (req, res, next) => {
+  const senderUserName = req.body.senderUserName;
+  const reciverUserName = req.body.reciverUserName;
+  const amount = req.body.amount;
+
+  const senderIdQuery = `SELECT id FROM user where username='${senderUserName}'`;
+  const senderId = await getDataAsync(senderIdQuery);
+
+  const reciverIdQuery = `SELECT id FROM user where username='${reciverUserName}'`;
+  const receiverId = await getDataAsync(reciverIdQuery);
+  console.log(receiverId);
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  const createTransferQuery = `INSERT transfer (amount, date, sender, receiver, status) 
+                                  values(${amount}, '${formattedDate}', ${senderId[0].id}, ${receiverId[0].id}, 'processing' )`;
+  await getDataAsync(createTransferQuery);
+  // dar inja bayad dobare b safhe detaile makhsoose karbar redirect krd
+  res.redirect(`/user/${senderId[0].id}/customer/detail`);
+});
+
+exports.createWithdrawalPageForCustomer = asyncHandler(
+  async (req, res, next) => {
+    // render krdn safhe create transfer
+    // res.render('transaction_details',{data});
+    const userName = req.params.username;
+    const result = { userName: userName };
+    res.render("user_withdrawl_create", { result });
+  }
+);
+
+exports.createWithdrawalforCustomer = asyncHandler(async (req, res, next) => {
+  const cashierUserName = req.body.cashierUserName;
+  const acceptorcode = req.body.acceptorcode;
+  const amount = req.body.amount;
+
+  console.log(cashierUserName);
+
+  const cashierIdQuery = `SELECT id FROM user where username='${cashierUserName}'`;
+  const cashieId = await getDataAsync(cashierIdQuery);
+
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  const createWithdrawalrQuery = `INSERT withdrawal (amount, date_time, userId, acceptorcode , status) 
+                                  values(${amount}, '${formattedDate}', ${cashieId[0].id}, '${acceptorcode}', 'processing' )`;
+  await getDataAsync(createWithdrawalrQuery);
+  // dar inja bayad dobare b safhe detaile makhsoose karbar redirect krd
+  res.redirect(`/user/${cashieId[0].id}/customer/detail`);
+});
 
 function getDataAsync(userDataQuery) {
   return new Promise((resolve, reject) => {
@@ -171,4 +232,3 @@ function getDataAsync(userDataQuery) {
     });
   });
 }
-

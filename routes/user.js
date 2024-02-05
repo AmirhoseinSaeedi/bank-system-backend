@@ -17,5 +17,5 @@ router.get("/createUser", user_controller.createUser);
 router.post("/create", user_controller.create);
 
 router.delete("/delete/:id", user_controller.delete);
-
+router.get("/:id/customer/detail", user_controller.detailForCustomer);
 module.exports = router;

@@ -31,8 +31,7 @@ exports.create = asyncHandler(async (req, res, next) => {
   const INSERTQuery = ` INSERT user (firstname, lastname, username, password, phoneNumber, NationalId, isAdmin)
                           VALUES ('${firstName}', '${lastName}', '${userName}', '${password}', '${phoneNumber}', '${nationalId}', 0 )`;
   await getDataAsync(INSERTQuery);
-  console.log("here");
-  res.redirect(`/`);
+  res.redirect("/");
 });
 
 function getDataAsync(userDataQuery) {
