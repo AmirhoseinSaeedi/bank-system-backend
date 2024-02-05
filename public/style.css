@@ -49,3 +49,13 @@ td {
 td[data-clickable="true"]:hover {
   cursor: pointer;
 }
+
+#transfer-status {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use the default text color */
+  cursor: pointer; /* Show pointer cursor on hover */
+  border: none; /* Remove border */
+  background-color: transparent; /* Set background to transparent */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}

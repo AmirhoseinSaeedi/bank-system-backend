@@ -1,4 +1,4 @@
-const { createUser } = require("../../controllers/userController");
+
 
 function toggleEdit(customerId) {
   console.log("i am here in toggle edit");
@@ -24,19 +24,56 @@ function toggleEdit(customerId) {
   }
 }
 
-editStatus = () => {
-  let status = document.getElementById("transaction-status");
-  status.contentEditable = status.contentEditable === "true" ? "false" : "true";
 
-  document.addEventListener("click", function (event) {
-    // Check if the clicked element is the status element or one of its ancestors
-    if (!status.contains(event.target)) {
-      // Clicked outside the status element, set contentEditable to false
-      status.contentEditable = "false";
-    }
-  });
+editTransactionStatus = (trId) =>{
 
-  status.focus();
+  console.log(trId);
+  const statusInput = document.getElementById('transaction-status');
+  editTrnsactinDetails(trId,statusInput.value)
+}
+
+editTrnsactinDetails = (trId, trStatus) => {
+
+  console.log(trId);
+  console.log(trStatus);
+
+  const requestBody = {
+    id: trId,
+    status: trStatus
+  };
+  
+  // Make a POST request
+  fetch('http://localhost:3000/transaction/withdrawal/update', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+      // Add any other headers if needed
+    },
+    body: JSON.stringify(requestBody)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Handle the response if needed
+      return response.json();
+    })
+    .then(data => {
+      // Handle the data if needed
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle errors
+      console.error('Error:', error);
+    });
+
+}
+
+editTransferStatus = (trId) => {
+
+  const statusInput = document.getElementById('transfer-status');
+  editTrnsferDetails(trId,statusInput.value)
+
 };
 
 function deleteCustomer(id) {
@@ -65,15 +102,40 @@ function deleteCustomer(id) {
     });
 }
 
-// sendUserData = () =>{
-  
-//   const firstName = document.getElementById("firstName").value;
-//   const lastName = document.getElementById('lastName').value;
-//   const phoneNumber = document.getElementById('phoneNumber').value;
-//   const nationalId = document.getElementById('nationalId').value;
-//   const userName = document.getElementById('userName').value;
-//   const password = document.getElementById('password').value;
-//   const isAdimn = document.getElementById('isAdmin').value;
+editTrnsferDetails = (trId, trStatus) => {
 
-//   console.log(firstName)
-// }
+  console.log(trId);
+  console.log(trStatus);
+
+  const requestBody = {
+    id: trId,
+    status: trStatus
+  };
+  
+  // Make a POST request
+  fetch('http://localhost:3000/transaction/transfer/update', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+      // Add any other headers if needed
+    },
+    body: JSON.stringify(requestBody)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Handle the response if needed
+      return response.json();
+    })
+    .then(data => {
+      // Handle the data if needed
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle errors
+      console.error('Error:', error);
+    });
+
+}
+

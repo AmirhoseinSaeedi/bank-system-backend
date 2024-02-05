@@ -11,6 +11,7 @@ router.get(
   "/withdrawal/createPage",
   transaction_controller.createWithdrawalPage
 );
+router.get("/user/alltransctions/:id", transaction_controller.SingleUserTransactions);
 router.post("/withdrawal/create", transaction_controller.createWithdrawal);
 router.put("/transfer/update", transaction_controller.editTransferStatus);
 router.put("/withdrawal/update", transaction_controller.editWithdrawalStatus);

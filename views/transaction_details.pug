@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div.container-fluid.w-75
+  div.container-fluid.w-75.py-5.rounded(style="background-color: #f0f0f0; padding: 20px;") 
     h3 Cashier Details
     hr
     each transfer in data
@@ -36,4 +36,6 @@ block content
               p#transactionDate=transfer.date_time
             div.col-md-4
               label Status:
-              p(id="transaction-status" data-clickable='true' data-toggle='tooltip' title='Click to edit' onclick="editStatus()") Success
+              div.d-flex.align-items-center
+                input.form-control(type="text" id="transaction-status" value=transfer.status)
+                button.btn.btn-primary.ml-2(type="button" onclick=`editTransactionStatus('${transfer.id}')`) Edit

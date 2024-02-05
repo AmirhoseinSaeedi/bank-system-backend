@@ -25,20 +25,20 @@ exports.getAll = asyncHandler(async (req, res, next) => {
 
 exports.getTtansfer = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
-  const transactionQuery = `SELECT t.amount, t.date, t.status, u1.firstName AS sender_firstName,
+  const transactionQuery = `SELECT t.id, t.amount, t.date, t.status, u1.firstName AS sender_firstName,
                             u1.lastName AS sender_lastName,u2.firstName AS receiver_firstName,u2.lastName AS receiver_lastName
                           FROM transfer t
                           JOIN user u1 ON t.sender = u1.id
                           JOIN user u2 ON t.receiver = u2.id
                           where t.id = ${id}`;
   const transactionData = await getDataAsync(transactionQuery);
-  res.send(transactionData[0]);
+  res.render('transfer_details',{transactionData});
 });
 
 exports.getWithdrawal = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   console.log(id);
-  const withdrawalQuery = `SELECT w.amount, w.status, w.date_time, w.acceptorcode, u.firstName as user_firstName, 
+  const withdrawalQuery = `SELECT w.id, w.amount, w.status, w.date_time, w.acceptorcode, u.firstName as user_firstName, 
                             u.lastName as user_lastName
                             FROM withdrawal w
                             JOIN user u ON w.userId = u.id
@@ -111,6 +111,10 @@ exports.editTransferStatus = asyncHandler(async (req, res, next) => {
   const id = req.body.id;
   const status = req.body.status;
 
+  console.log("looooooooooook")
+  console.log(id);
+  console.log(status);
+
   const updateTransferQuery = `Update transfer
                                 Set status='${status}' WHERE id = ${id}`;
   await getDataAsync(updateTransferQuery);
@@ -126,6 +130,36 @@ exports.editWithdrawalStatus = asyncHandler(async (req, res, next) => {
   await getDataAsync(updateWithdrawalQuery);
   res.redirect("/transaction");
 });
+
+
+exports.SingleUserTransactions = asyncHandler(async (req, res, next) => {
+  const userId = req.params.id;
+  const transactionQuery = `SELECT t.id , t.amount, t.date, t.status, u1.firstName AS sender_firstName,
+                            u1.lastName AS sender_lastName,u2.firstName AS receiver_firstName,u2.lastName AS receiver_lastName
+                          FROM transfer t
+                          JOIN user u1 ON t.sender = u1.id
+                          JOIN user u2 ON t.receiver = u2.id
+                          WHERE u1.id = ${userId} and u1.isdeleted=0`
+                          ;
+  const transactionData = await getDataAsync(transactionQuery);
+
+  const WithdrawalQuery = `SELECT w.id , w.amount, w.status, w.date_time, w.acceptorcode, u.firstName as user_firstName, 
+                              u.lastName as user_lastName
+                            FROM withdrawal w
+                            JOIN user u ON w.userId = u.id
+                            WHERE u.id=${userId} and u.isdeleted=0`;
+  const withdrawalData = await getDataAsync(WithdrawalQuery);
+
+  const response = {
+    transactionData: transactionData,
+    withdrawalData: withdrawalData,
+  };
+  res.send(response);
+  // res.render('customer_view',{response});
+});
+
+
+
 function getDataAsync(userDataQuery) {
   return new Promise((resolve, reject) => {
     connection.query(userDataQuery, (error, results, fields) => {
@@ -137,3 +171,4 @@ function getDataAsync(userDataQuery) {
     });
   });
 }
+
