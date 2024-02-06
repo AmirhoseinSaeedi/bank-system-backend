@@ -1,8 +1,8 @@
 extends layout
 
 block content
-    form(action='/signin/create' method='post')
-        div(class='w-100' style ='margin: 20px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box; width:30%')
+    form(action='/signin/create' method='post').container-fluid.container-div.d-flex.flex-column.align-items-center
+        div(style ='margin: 100px;padding: 20px;border: 1px solid black;border-radius: 15px;background-color: antiquewhite;box-sizing: border-box; width:30%')
             p Name
             div(class='')
                 input(id='firstName' class="form-control" type='text' name='firstName' )

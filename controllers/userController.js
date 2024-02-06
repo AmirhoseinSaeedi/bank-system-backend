@@ -91,7 +91,7 @@ exports.update = asyncHandler(async (req, res, next) => {
                         WHERE id = ${id};`;
   await getDataAsync(updateQuery);
 
-  res.redirect(`/user/${id}/detail`);
+  res.redirect(`/user/getAll` );
 });
 
 // in api ro vqti call mikni k user roo button create Customer click mikne

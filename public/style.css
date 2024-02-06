@@ -59,3 +59,10 @@ td[data-clickable="true"]:hover {
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margin */
 }
+
+#login-button {
+  border: none;
+  /* background-color: none; */
+  background: none;
+  color: blue;
+}

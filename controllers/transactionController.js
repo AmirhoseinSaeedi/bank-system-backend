@@ -114,7 +114,7 @@ exports.editTransferStatus = asyncHandler(async (req, res, next) => {
   const updateTransferQuery = `Update transfer
                                 Set status='${status}' WHERE id = ${id}`;
   await getDataAsync(updateTransferQuery);
-  res.redirect("/transaction");
+   res.redirect("/transaction");
 });
 
 exports.editWithdrawalStatus = asyncHandler(async (req, res, next) => {

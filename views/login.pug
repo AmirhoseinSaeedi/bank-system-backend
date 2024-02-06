@@ -1,16 +1,19 @@
 extends layout
 
 block content
-  form(action="/user/login", method="post")
-    .create-main-box
-      p username
-      div
-        input.login-input(type="text", name="username", style="width:27vw")
-      p password
-      div
-        input.login-input(type="text", name="password", style="width:27vw")
-      button.btn.btn-outline-dark(type=button) login
-  div.text-center 
-    span(style="margin-top: 10px;") do not have an account?
-    button(onclick=`location.href='/signin'`) Register here
+  div(class='container-fluid').container-div.d-flex.flex-column.align-items-center
+    form(action="/user/login", method="post")
+      .create-main-box
+        p username
+          div
+            input.login-input(type="text", name="username", style="width:27vw")
+        p password
+          div
+            input.login-input(type="text", name="password", style="width:27vw")
+        button.btn.btn-outline-dark(type=button) login
+
+    div.text-center 
+      span(style="margin-top: 10px;") do not have an account?
+      button(id='login-button' onclick=`location.href='/signin'`) Register here
+
       
