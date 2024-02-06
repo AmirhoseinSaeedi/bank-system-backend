@@ -26,6 +26,7 @@ block content
                         button.btn.btn-outline-dark(type=button) update
 
 
+
     div.container-fluid.w-75.h-100
         h3.mt-5 All Transactions:
         hr
@@ -51,10 +52,12 @@ block content
                             td()=transaction.date_time
                             td()=transaction.amount
                             td=transaction.status
+                            td 
+                                button(class='btn btn-primary' onclick=`location.href='/transaction/withdrawal/get/${transaction.id}'`) Details
 
         h4.mt-5 transfers:
         hr
-        table.table.table-striped
+        table.table.table-striped.table-hover
             thead
                 tr
                     th Sender Name
@@ -68,15 +71,17 @@ block content
             tbody
                 if response.transferData
                     each transaction in response.transferData
-                        tr
+                            tr
                             td()=response.userData[0].firstname
                             td()=response.userData[0].lastname
                             td()=transaction.receiver_firstName
                             td()=transaction.receiver_lastName
+
                             td()=transaction.date
                             td()=transaction.amount
                             td=transaction.status
-                        
+                            td 
+                                button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/get/${transaction.id}'`) Details
         h4.mt-5 Deposit:
         hr
         table.table.table-striped.table-hover
@@ -93,15 +98,19 @@ block content
             tbody
                 if response.depositData
                     each transaction in response.depositData
-                        tr
+                            tr
                             td()=transaction.sender_firstName
                             td()=transaction.sender_lastName
+
                             td()=response.userData[0].firstname
                             td()=response.userData[0].lastname
+
                             td()=transaction.date
                             td()=transaction.amount
                             td=transaction.status
-                                
+                            td 
+                                button(class='btn btn-primary' onclick=`location.href='/transaction/transfer/get/${transaction.id}'`) Details
+            
             
 
             
