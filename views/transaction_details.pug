@@ -38,4 +38,4 @@ block content
               label Status:
               div.d-flex.align-items-center
                 input.form-control(type="text" id="transaction-status" value=transfer.status)
-                button.btn.btn-primary.ml-2(type="button" onclick=`/transaction/withdrawal/update`) Edit
+                button.btn.btn-primary.ml-2(type="button" onclick=`editTransactionStatus('${transfer.id}')`) Edit
